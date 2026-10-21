@@ -216,12 +216,11 @@ def main():
           f"{'WPct':>5s} {'bWAR':>7s} {'pWAR':>7s} {'Total':>7s}")
     print(f"  {'-' * 70}")
 
-    war_vals = []
-    wpct_vals = []
-
     # Separate P5 teams (known conference) for R² calculation
-    p5_war = []
+    p5_war_pg = []
     p5_wpct = []
+    p5_war = []
+    p5_wins = []
 
     for row in team_rows:
         team_name = (row[ti.get("team_name", ti.get("team_id"))] or "")[:19]
@@ -232,28 +231,26 @@ def main():
         bwar = row[ti["team_batting_war"]] or 0
         pwar = row[ti["team_pitching_war"]] or 0
         twar = row[ti["team_total_war"]] or 0
-
-        war_vals.append(twar)
-        wpct_vals.append(wpct)
+        war_pg = row[ti["war_per_game"]] or 0
 
         is_p5 = conf not in ("Unknown", "")
         if is_p5:
-            p5_war.append(twar)
+            p5_war_pg.append(war_pg)
             p5_wpct.append(wpct)
+            p5_war.append(twar)
+            p5_wins.append(wins)
 
         print(f"  {team_name:<20s} {conf:<8s} {wins:>3d}-{losses:<3d} "
               f"{wpct:>5.3f} {bwar:>+7.1f} {pwar:>+7.1f} {twar:>+7.1f}"
               + ("" if is_p5 else "  *"))
 
     # Compute R²
-    if len(war_vals) >= 3:
-        r2_all = compute_r_squared(war_vals, wpct_vals)
-        print(f"\n  R² (All teams, n={len(war_vals)}): {r2_all:.3f}")
-
-    if len(p5_war) >= 3:
-        r2_p5 = compute_r_squared(p5_war, p5_wpct)
-        print(f"  R² (P5 teams, n={len(p5_war)}):  {r2_p5:.3f}")
-        print(f"  (* = non-P5 opponent, excluded from P5 R²)")
+    if len(p5_war_pg) >= 3:
+        r2_wpg = compute_r_squared(p5_war_pg, p5_wpct)
+        r2_raw = compute_r_squared(p5_war, p5_wins)
+        print(f"\n  R2 WAR/game vs WPct (P5, n={len(p5_war_pg)}): {r2_wpg:.3f}")
+        print(f"  R2 total WAR vs Wins (P5, n={len(p5_war)}):  {r2_raw:.3f}")
+        print(f"  (* = non-P5 opponent, excluded from R2)")
 
     team_path = export_csv(team_rows, team_cols, "team_war_vs_wins.csv")
     print(f"  Exported: {team_path}")

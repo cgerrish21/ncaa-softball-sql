@@ -1,6 +1,6 @@
 # NCAA Softball WAR — SQL Portfolio Project
 
-A complete Wins Above Replacement (WAR) analytical system for NCAA Division I softball, implemented in SQL and Python. Reconstructs the same methodology as an existing JavaScript/Firestore pipeline, validated at R² = 0.947 against the JS pipeline's WAR values and R² = 0.836 for team WAR vs actual wins.
+A complete Wins Above Replacement (WAR) analytical system for NCAA Division I softball, implemented in SQL and Python. Reconstructs the same methodology as an existing JavaScript/Firestore pipeline, validated at R² = 0.947 against the JS pipeline's WAR values and R² = 0.926 for team WAR vs actual wins.
 
 ## Quick Start
 
@@ -129,9 +129,12 @@ Aggregates all player WAR by team, joins to win-loss records. R² between team W
 | Runs per Win (Pythagenpat) | 10.65 |
 | Top batter | Jordan Woolery (UCLA) +5.60 WAR |
 | Top pitcher | Jordy Frahm (Nebraska) +14.45 pWAR |
-| Team WAR vs Wins R² | 0.836 (65 P5 teams) |
+| Team WAR/game vs WPct R² | 0.915 (65 P5 teams) |
+| Team total WAR vs Wins R² | 0.926 (65 P5 teams) |
 
 ### Validation vs JS Pipeline
+
+Per-player WAR comparison against the JavaScript/Firestore implementation (run on an earlier data snapshot with ~7% fewer plate appearances):
 
 | Metric | Value |
 |--------|-------|

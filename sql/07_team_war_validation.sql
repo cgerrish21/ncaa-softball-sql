@@ -113,7 +113,9 @@ SELECT
     ROUND(tr.win_pct, 3) AS win_pct,
     ROUND(tw.team_batting_war, 2) AS team_batting_war,
     ROUND(tw.team_pitching_war, 2) AS team_pitching_war,
-    ROUND(tw.team_total_war, 2) AS team_total_war
+    ROUND(tw.team_total_war, 2) AS team_total_war,
+    -- WAR per game: normalizes for different game counts across teams
+    ROUND(tw.team_total_war / tr.games_played, 3) AS war_per_game
 FROM team_war_combined tw
 JOIN team_records tr ON tr.team_id = tw.team_id
 LEFT JOIN teams t ON t.team_id = tw.team_id
