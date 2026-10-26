@@ -48,7 +48,7 @@ xERA (component regression) → runs saved vs replacement → ÷ RPW
 |-----------|---------|
 | **xERA** | `-2.5788 + 0.5883×(nonHR-H/7) + 0.4587×(BB/7) + 1.4025×(HR/7)` |
 | **Runs saved** | `(replacement_xERA - xERA) / 7 × IP` |
-| **Replacement xERA** | `5.77` (from replacement WHIP 1.806, K/7 4.18) |
+| **Replacement xERA** | `5.34` (from replacement nonHR-H/7 7.68, BB/7 3.75, HR/7 1.20) |
 
 xERA model: IP-weighted OLS on 945 D1 pitchers (20+ IP), R² = 88.1%. Decomposes WHIP into hits/walks/HR with distinct ERA impacts. HR allowed is 2.4x as harmful as a non-HR hit.
 

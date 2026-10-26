@@ -8,7 +8,7 @@
 --
 -- Replacement xERA derived from replacement component rates:
 --   nonHR-H/7 = 7.68, BB/7 = 3.75, HR/7 = 1.20
---   → Replacement xERA = -2.5788 + 0.5883*7.68 + 0.4587*3.75 + 1.4025*1.20 = 5.77
+--   → Replacement xERA = -2.5788 + 0.5883*7.68 + 0.4587*3.75 + 1.4025*1.20 = 5.34
 
 WITH rpw AS (
     -- Runs Per Win via Pythagenpat (same as batting WAR)
